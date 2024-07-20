@@ -1,22 +1,29 @@
-class AddCommandException(BaseException):
+class AddCommandException(Exception):
     pass
 
 
-class RemoveCommandException(BaseException):
+class RemoveCommandException(Exception):
     pass
 
 
-class FindCommandException(BaseException):
+class FindCommandException(Exception):
     pass
 
 
-class ShowCommandException(BaseException):
+class ShowCommandException(Exception):
     pass
 
 
-class ChangeCommandException(BaseException):
+class ChangeCommandException(Exception):
     pass
 
 
-class IncorrectCommandException(BaseException):
+class IncorrectCommandException(Exception):
+    pass
+
+
+class ExitCommandException(Exception):
+    pass
+
+class FinishInterpretationException(Exception):
     pass

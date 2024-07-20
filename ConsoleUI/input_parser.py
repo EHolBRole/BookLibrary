@@ -7,7 +7,8 @@ def execute_user_input(u_input: list[str]):
                 cm.RemoveBookCommand(),
                 cm.FindBookCommand(),
                 cm.ShowBooksCommand(),
-                cm.ChangeBookStatusCommand()}
+                cm.ChangeBookStatusCommand(),
+                cm.ExitAppCommand()}
     if len(u_input) < 1:
         raise Exception()
     is_executed = False

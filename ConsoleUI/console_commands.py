@@ -16,12 +16,29 @@ class Command(ABC):
     @abstractmethod
     def is_user_input_valid(self, args: list[str]):
         pass
+
     pass
+
+
+class ExitAppCommand(Command):
+    def is_user_input_valid(self, args: list[str]):
+        if len(args) != 0:
+            return False
+        return True
+
+    def execute(self, args: list[str]):
+        if self.is_user_input_valid(args):
+            raise ex.FinishInterpretationException('Exit exception!')
+        else:
+            raise ex.ExitCommandException('Invalid input!')
+
+    def __init__(self):
+        super().__init__('exit')
 
 
 class AddBookCommand(Command):
     def __init__(self):
-        super().__init__("add")
+        super().__init__('add')
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -49,13 +66,14 @@ class AddBookCommand(Command):
             with open('../JSON/library.json', 'w+') as f:
                 json.dump({1: book.__dict__}, f)
             pass
+
     pass
 
 
 class RemoveBookCommand(Command):
 
     def __init__(self):
-        super().__init__("rm")
+        super().__init__('rm')
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -83,7 +101,7 @@ class FindBookCommand(Command):
         pass
 
     def __init__(self):
-        super().__init__("find")
+        super().__init__('find')
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -106,7 +124,7 @@ class ShowBooksCommand(Command):
         return True
 
     def __init__(self):
-        super().__init__("ls")
+        super().__init__('ls')
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -129,7 +147,7 @@ class ChangeBookStatusCommand(Command):
         pass
 
     def __init__(self):
-        super().__init__("schange")
+        super().__init__('schange')
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
