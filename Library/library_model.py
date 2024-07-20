@@ -3,5 +3,5 @@ class Book:
         self.title = title
         self.author = author
         self.year = year
-        self.status = "in stock"
+        self.status = "stocked"
 

@@ -1,4 +1,5 @@
 import console_commands as cm
+import Exceptions.exceptions as ex
 
 
 def execute_user_input(u_input: list[str]):
@@ -17,5 +18,5 @@ def execute_user_input(u_input: list[str]):
             is_executed = True
             break
     if not is_executed:
-        raise Exception()
+        raise ex.IncorrectCommandException("Command not found")
     pass
