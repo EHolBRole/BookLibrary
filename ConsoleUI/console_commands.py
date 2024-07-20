@@ -6,8 +6,9 @@ from abc import ABC, abstractmethod
 
 
 class Command(ABC):
-    def __init__(self, name):
+    def __init__(self, name, lib_address):
         self.name = name
+        self.lib_address = lib_address
 
     @abstractmethod
     def execute(self, args: list[str]):
@@ -32,13 +33,13 @@ class ExitAppCommand(Command):
         else:
             raise ex.ExitCommandException('Invalid input!')
 
-    def __init__(self):
-        super().__init__('exit')
+    def __init__(self, lib_address):
+        super().__init__('exit', lib_address)
 
 
 class AddBookCommand(Command):
-    def __init__(self):
-        super().__init__('add')
+    def __init__(self, lib_address):
+        super().__init__('add', lib_address)
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -55,15 +56,15 @@ class AddBookCommand(Command):
 
     def parse_book_to_json(self, book: Book):
         try:
-            with open('../JSON/library.json', 'r+') as f:
+            with open(self.lib_address, 'r+') as f:
                 library_data = json.load(f)
                 nk = 1 + int(list(library_data)[-1])
                 library_data[nk] = book.__dict__
-                with open('../JSON/library.json', 'w') as fi:
+                with open(self.lib_address, 'w') as fi:
                     json.dump(library_data, fi)
             pass
         except json.decoder.JSONDecodeError:
-            with open('../JSON/library.json', 'w+') as f:
+            with open(self.lib_address, 'w+') as f:
                 json.dump({1: book.__dict__}, f)
             pass
 
@@ -72,15 +73,15 @@ class AddBookCommand(Command):
 
 class RemoveBookCommand(Command):
 
-    def __init__(self):
-        super().__init__('rm')
+    def __init__(self, lib_address):
+        super().__init__('rm', lib_address)
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open('../JSON/library.json', 'r+') as f:
+            with open(self.lib_address, 'r+') as f:
                 library_data = json.load(f)
                 library_data.pop(args[0])
-                with open('../JSON/library.json', 'w') as fi:
+                with open(self.lib_address, 'w') as fi:
                     json.dump(library_data, fi)
         else:
             raise ex.RemoveCommandException("Invalid input!")
@@ -100,12 +101,12 @@ class FindBookCommand(Command):
         return True
         pass
 
-    def __init__(self):
-        super().__init__('find')
+    def __init__(self, lib_address):
+        super().__init__('find', lib_address)
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open('../JSON/library.json', 'r+') as f:
+            with open(self.lib_address, 'r+') as f:
                 library_data = json.load(f)
                 for book in library_data:
                     if library_data[book]['title'] == args[0]:
@@ -123,12 +124,12 @@ class ShowBooksCommand(Command):
     def is_user_input_valid(self, args: list[str]):
         return True
 
-    def __init__(self):
-        super().__init__('ls')
+    def __init__(self, lib_address):
+        super().__init__('ls', lib_address)
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open('../JSON/library.json', 'r+') as f:
+            with open(self.lib_address, 'r+') as f:
                 library_data = json.load(f)
                 for book in library_data:
                     print(library_data[book])
@@ -146,15 +147,15 @@ class ChangeBookStatusCommand(Command):
         return False
         pass
 
-    def __init__(self):
-        super().__init__('schange')
+    def __init__(self, lib_address):
+        super().__init__('schange', lib_address)
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open('../JSON/library.json', 'r+') as f:
+            with open(self.lib_address, 'r+') as f:
                 library_data = json.load(f)
                 library_data[args[0]]['status'] = args[1]
-                with open('../JSON/library.json', 'w') as fi:
+                with open(self.lib_address, 'w') as fi:
                     json.dump(library_data, fi)
         else:
             raise ex.ChangeCommandException("Invalid input!")

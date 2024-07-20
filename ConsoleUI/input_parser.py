@@ -3,12 +3,12 @@ import Exceptions.exceptions as ex
 
 
 def execute_user_input(u_input: list[str]):
-    commands = {cm.AddBookCommand(),
-                cm.RemoveBookCommand(),
-                cm.FindBookCommand(),
-                cm.ShowBooksCommand(),
-                cm.ChangeBookStatusCommand(),
-                cm.ExitAppCommand()}
+    commands = {cm.AddBookCommand('../JSON/library.json'),
+                cm.RemoveBookCommand('../JSON/library.json'),
+                cm.FindBookCommand('../JSON/library.json'),
+                cm.ShowBooksCommand('../JSON/library.json'),
+                cm.ChangeBookStatusCommand('../JSON/library.json'),
+                cm.ExitAppCommand('../JSON/library.json')}
     if len(u_input) < 1:
         raise Exception()
     is_executed = False
