@@ -90,12 +90,17 @@ class FindBookCommand(Command):
 
 class ShowBooksCommand(Command):
     def is_user_input_valid(self, args: list[str]):
-        pass
+        return True
 
     def __init__(self):
         super().__init__("ls")
 
     def execute(self, args: list[str]):
+        if self.is_user_input_valid(args):
+            with open('../JSON/library.json', 'r+') as f:
+                library_data = json.load(f)
+                for book in library_data:
+                    print(library_data[book])
         pass
 
 
