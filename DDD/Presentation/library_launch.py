@@ -1,6 +1,6 @@
 import Exceptions.exceptions as ex
 
-from input_mapper import execute_user_input
+from input_mapper import premap_user_input
 
 
 def get_input():
@@ -12,7 +12,7 @@ def main():
     is_to_continue = True
     while is_to_continue:
         try:
-            execute_user_input(get_input())
+            premap_user_input(get_input())
         except ex.AddCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.RemoveCommandException:

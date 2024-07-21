@@ -5,9 +5,3 @@ class Book:
         self.year = year
         self.status = "stocked"
 
-
-class Request:
-    def __init__(self, command, args: list):
-        self.command = command
-        self.args = args
-        pass

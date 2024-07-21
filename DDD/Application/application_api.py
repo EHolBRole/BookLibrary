@@ -1,4 +1,2 @@
-class ApplicationAPI:
-    def PreProcessData(self, data):
-        pass
+def PreProcessData(data: list):
     pass
