@@ -1,6 +1,6 @@
 import Exceptions.exceptions as ex
 
-from DDD.Presentation.input_mapper import execute_user_input
+from input_mapper import execute_user_input
 
 
 def get_input():

@@ -25,5 +25,6 @@ class IncorrectCommandException(Exception):
 class ExitCommandException(Exception):
     pass
 
+
 class FinishInterpretationException(Exception):
     pass
