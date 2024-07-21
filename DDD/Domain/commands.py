@@ -6,9 +6,8 @@ from abc import ABC, abstractmethod
 
 
 class Command(ABC):
-    def __init__(self, name, lib_address):
+    def __init__(self, name):
         self.name = name
-        self.lib_address = lib_address
 
     @abstractmethod
     def execute(self, args: list[str]):
@@ -33,13 +32,14 @@ class ExitAppCommand(Command):
         else:
             raise ex.ExitCommandException('Invalid input!')
 
-    def __init__(self, lib_address):
-        super().__init__('exit', lib_address)
+    def __init__(self):
+        super().__init__('exit')
 
 
 class AddBookCommand(Command):
-    def __init__(self, lib_address):
-        super().__init__('add', lib_address)
+    def __init__(self):
+        super().__init__('add')
+        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -73,8 +73,9 @@ class AddBookCommand(Command):
 
 class RemoveBookCommand(Command):
 
-    def __init__(self, lib_address):
-        super().__init__('rm', lib_address)
+    def __init__(self):
+        super().__init__('rm')
+        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -101,8 +102,9 @@ class FindBookCommand(Command):
         return True
         pass
 
-    def __init__(self, lib_address):
-        super().__init__('find', lib_address)
+    def __init__(self):
+        super().__init__('find')
+        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -124,8 +126,9 @@ class ShowBooksCommand(Command):
     def is_user_input_valid(self, args: list[str]):
         return True
 
-    def __init__(self, lib_address):
-        super().__init__('ls', lib_address)
+    def __init__(self):
+        super().__init__('ls')
+        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -147,8 +150,9 @@ class ChangeBookStatusCommand(Command):
         return False
         pass
 
-    def __init__(self, lib_address):
-        super().__init__('schange', lib_address)
+    def __init__(self):
+        super().__init__('schange')
+        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
