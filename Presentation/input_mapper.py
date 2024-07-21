@@ -1,5 +1,5 @@
-import DDD.Application.application_api as a
-import DDD.Application.application_dto as a_dto
+import Application.application_api as a
+import Application.application_dto as a_dto
 import Exceptions.exceptions as ex
 
 

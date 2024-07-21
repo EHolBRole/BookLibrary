@@ -1,4 +1,4 @@
-import DDD.Domain.commands as c
+import Domain.commands as c
 
 
 class DomainDTORequest:

@@ -1,5 +1,5 @@
 import json
-import DDD.Domain.entities as e
+import Domain.entities as e
 
 from abc import ABC, abstractmethod
 

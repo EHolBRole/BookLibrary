@@ -1,10 +1,8 @@
-import json
 import Exceptions.exceptions as ex
-import DDD.Infrastructure.infrastructure_api as i_api
-import DDD.Application.application_api as a_api
-import DDD.Application.application_dto as a_dto
+import Infrastructure.infrastructure_api as i_api
+import Application.application_dto as a_dto
 
-from DDD.Domain.entities import Book
+from Domain.entities import Book
 from abc import ABC, abstractmethod
 
 

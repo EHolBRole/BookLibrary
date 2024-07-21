@@ -1,6 +1,6 @@
-import DDD.Application.application_dto as ap
-import DDD.Domain.domain_dto as d_dto
-import DDD.Domain.domain_api as d_api
+import Application.application_dto as ap
+import Domain.domain_dto as d_dto
+import Domain.domain_api as d_api
 import Exceptions.exceptions as ex
 
 

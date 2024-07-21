@@ -1,4 +1,4 @@
-import DDD.Infrastructure.handlers as h
+import Infrastructure.handlers as h
 
 
 class InfrastructureAPI:
