@@ -12,3 +12,6 @@ class InfrastructureAPI:
     def get_data(self, data):
         return self.handler.get_data(data)
     pass
+
+
+infrastructure_api = InfrastructureAPI(handlers.JsonHandler)

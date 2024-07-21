@@ -1,7 +1,9 @@
 import commands as cm
+import domain_dto as d_dto
 
 
-def ProcessRequest(request):
+def ProcessRequest(request: d_dto.DomainDTORequest):
+    request.command.execute(request.args)
     pass
 
 

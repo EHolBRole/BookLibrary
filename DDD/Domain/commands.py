@@ -1,5 +1,6 @@
 import json
 import Exceptions.exceptions as ex
+import DDD.Infrastructure.infrastructure_api as i_api
 
 from Library.library_model import Book
 from abc import ABC, abstractmethod
@@ -44,7 +45,7 @@ class AddBookCommand(Command):
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             book = Book(args[0], args[1], args[2])
-            self.parse_book_to_json(book)
+            i_api.infrastructure_api.push_data(book)
         else:
             raise ex.AddCommandException('Invalid input!')
         pass
@@ -79,11 +80,9 @@ class RemoveBookCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open(self.lib_address, 'r+') as f:
-                library_data = json.load(f)
-                library_data.pop(args[0])
-                with open(self.lib_address, 'w') as fi:
-                    json.dump(library_data, fi)
+            library_data = i_api.infrastructure_api.get_data()
+            library_data.pop(args[0])
+            i_api.infrastructure_api.push_data(library_data)
         else:
             raise ex.RemoveCommandException("Invalid input!")
         pass
@@ -108,15 +107,14 @@ class FindBookCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open(self.lib_address, 'r+') as f:
-                library_data = json.load(f)
-                for book in library_data:
-                    if library_data[book]['title'] == args[0]:
-                        print(library_data[book])
-                    elif library_data[book]['author'] == args[0]:
-                        print(library_data[book])
-                    elif library_data[book]['year'] == args[0]:
-                        print(library_data[book])
+            library_data = i_api.infrastructure_api.get_data()
+            for book in library_data:
+                if library_data[book]['title'] == args[0]:
+                    print(library_data[book])
+                elif library_data[book]['author'] == args[0]:
+                    print(library_data[book])
+                elif library_data[book]['year'] == args[0]:
+                    print(library_data[book])
         else:
             raise ex.FindCommandException("Invalid input!")
         pass
@@ -132,10 +130,9 @@ class ShowBooksCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open(self.lib_address, 'r+') as f:
-                library_data = json.load(f)
-                for book in library_data:
-                    print(library_data[book])
+            library_data = i_api.infrastructure_api.get_data()
+            for book in library_data:
+                print(library_data[book])
         else:
             raise ex.ShowCommandException("Invalid input!")
         pass
@@ -156,11 +153,9 @@ class ChangeBookStatusCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            with open(self.lib_address, 'r+') as f:
-                library_data = json.load(f)
-                library_data[args[0]]['status'] = args[1]
-                with open(self.lib_address, 'w') as fi:
-                    json.dump(library_data, fi)
+            library_data = i_api.infrastructure_api.get_data()
+            library_data[args[0]]['status'] = args[1]
+            i_api.infrastructure_api.push_data(library_data)
         else:
             raise ex.ChangeCommandException("Invalid input!")
         pass
