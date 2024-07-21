@@ -9,5 +9,4 @@ def premap_user_input(u_input: list[str]):
 
     request = adto.ApplicationDTORequest(u_input)
 
-    a.PreProcessRequest(request)
-    pass
+    return a.PreProcessRequest(request)

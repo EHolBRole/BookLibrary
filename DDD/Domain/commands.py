@@ -48,6 +48,7 @@ class AddBookCommand(Command):
         if self.is_user_input_valid(args):
             book = Book(args[0], args[1], args[2])
             i_api.infrastructure_api.push_data(book)
+            return True
         else:
             raise ex.AddCommandException('Invalid input!')
         pass
@@ -85,6 +86,7 @@ class RemoveBookCommand(Command):
             library_data = i_api.infrastructure_api.get_data()
             library_data.pop(args[0])
             i_api.infrastructure_api.push_data(library_data)
+            return True
         else:
             raise ex.RemoveCommandException("Invalid input!")
         pass
@@ -118,7 +120,7 @@ class FindBookCommand(Command):
                     response_data.append(library_data[book])
                 elif library_data[book]['year'] == args[0]:
                     response_data.append(library_data[book])
-            a_api.ProcessResponse(a_dto.ApplicationDTOResponse(response_data))
+            return a_dto.ApplicationDTOResponse(response_data)
         else:
             raise ex.FindCommandException("Invalid input!")
         pass
@@ -138,7 +140,7 @@ class ShowBooksCommand(Command):
             response_data = list()
             for book in library_data:
                 response_data.append(library_data[book])
-            a_api.ProcessResponse(a_dto.ApplicationDTOResponse(response_data))
+            return a_dto.ApplicationDTOResponse(response_data)
         else:
             raise ex.ShowCommandException("Invalid input!")
         pass
@@ -161,6 +163,7 @@ class ChangeBookStatusCommand(Command):
             library_data = i_api.infrastructure_api.get_data()
             library_data[args[0]]['status'] = args[1]
             i_api.infrastructure_api.push_data(library_data)
+            return True
         else:
             raise ex.ChangeCommandException("Invalid input!")
         pass

@@ -3,7 +3,7 @@ import domain_dto as d_dto
 
 
 def ProcessRequest(request: d_dto.DomainDTORequest):
-    request.command.execute(request.args)
+    return request.command.execute(request.args)
     pass
 
 

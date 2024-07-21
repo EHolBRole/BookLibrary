@@ -11,12 +11,7 @@ def PreProcessRequest(request: ap.ApplicationDTORequest):
             request.request_data.pop(0)
             d_request = d_dto.DomainDTORequest(c, request.request_data)
             is_executed = True
-            d_api.ProcessRequest(d_request)
-            break
+            return d_api.ProcessRequest(d_request)
     if not is_executed:
         raise ex.IncorrectCommandException("Invalid command!")
-    pass
-
-
-def ProcessResponse(response: ap.ApplicationDTOResponse):
     pass
