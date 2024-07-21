@@ -16,3 +16,7 @@ def PreProcessRequest(request: ap.ApplicationDTORequest):
     if not is_executed:
         raise ex.IncorrectCommandException("Invalid command!")
     pass
+
+
+def ProcessResponse(response: ap.ApplicationDTOResponse):
+    pass

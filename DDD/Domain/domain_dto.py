@@ -8,6 +8,3 @@ class DomainDTORequest:
         pass
     pass
 
-
-class DomainDTOResponse:
-    pass

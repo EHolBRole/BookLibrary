@@ -6,4 +6,6 @@ class ApplicationDTORequest:
 
 
 class ApplicationDTOResponse:
+    def __init__(self, response_data: list):
+        self.response_data = response_data
     pass

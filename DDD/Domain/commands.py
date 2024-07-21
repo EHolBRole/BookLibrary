@@ -1,6 +1,8 @@
 import json
 import Exceptions.exceptions as ex
 import DDD.Infrastructure.infrastructure_api as i_api
+import DDD.Application.application_api as a_api
+import DDD.Application.application_dto as a_dto
 
 from Library.library_model import Book
 from abc import ABC, abstractmethod
@@ -108,13 +110,15 @@ class FindBookCommand(Command):
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             library_data = i_api.infrastructure_api.get_data()
+            response_data = list()
             for book in library_data:
                 if library_data[book]['title'] == args[0]:
-                    print(library_data[book])
+                    response_data.append(library_data[book])
                 elif library_data[book]['author'] == args[0]:
-                    print(library_data[book])
+                    response_data.append(library_data[book])
                 elif library_data[book]['year'] == args[0]:
-                    print(library_data[book])
+                    response_data.append(library_data[book])
+            a_api.ProcessResponse(a_dto.ApplicationDTOResponse(response_data))
         else:
             raise ex.FindCommandException("Invalid input!")
         pass
@@ -131,8 +135,10 @@ class ShowBooksCommand(Command):
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             library_data = i_api.infrastructure_api.get_data()
+            response_data = list()
             for book in library_data:
-                print(library_data[book])
+                response_data.append(library_data[book])
+            a_api.ProcessResponse(a_dto.ApplicationDTOResponse(response_data))
         else:
             raise ex.ShowCommandException("Invalid input!")
         pass
@@ -145,7 +151,6 @@ class ChangeBookStatusCommand(Command):
         if args[1] == "stocked" or args[1] == "given":
             return True
         return False
-        pass
 
     def __init__(self):
         super().__init__('schange')
