@@ -1,3 +1,5 @@
+import json
+
 import Exceptions.exceptions as ex
 import input_mapper as im
 import response_handler as rh
@@ -13,7 +15,8 @@ def main():
     while is_to_continue:
         try:
             response = im.premap_user_input(get_input())
-            rh.process_response(response)
+            if type(response) is not bool:
+                rh.process_response(response)
         except ex.AddCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.RemoveCommandException:
@@ -28,6 +31,8 @@ def main():
             print('Sorry, you\'ve entered unknown command!')
         except ex.ExitCommandException:
             print('Sorry, you shouldn\'t add any arguments to exit command!')
+        except json.JSONDecodeError:
+            print("Sorry, JSON file is either empty or broken!")
         except ex.FinishInterpretationException:
             print('Thank you!')
             is_to_continue = False

@@ -1,4 +1,4 @@
-import application_dto as ap
+import DDD.Application.application_dto as ap
 import DDD.Domain.domain_dto as d_dto
 import DDD.Domain.domain_api as d_api
 import Exceptions.exceptions as ex

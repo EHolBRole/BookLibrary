@@ -4,7 +4,7 @@ import DDD.Infrastructure.infrastructure_api as i_api
 import DDD.Application.application_api as a_api
 import DDD.Application.application_dto as a_dto
 
-from Library.library_model import Book
+from DDD.Domain.entities import Book
 from abc import ABC, abstractmethod
 
 
@@ -57,21 +57,6 @@ class AddBookCommand(Command):
         if len(args) != 3:
             return False
         return True
-
-    def parse_book_to_json(self, book: Book):
-        try:
-            with open(self.lib_address, 'r+') as f:
-                library_data = json.load(f)
-                nk = 1 + int(list(library_data)[-1])
-                library_data[nk] = book.__dict__
-                with open(self.lib_address, 'w') as fi:
-                    json.dump(library_data, fi)
-            pass
-        except json.decoder.JSONDecodeError:
-            with open(self.lib_address, 'w+') as f:
-                json.dump({1: book.__dict__}, f)
-            pass
-
     pass
 
 
@@ -96,6 +81,7 @@ class RemoveBookCommand(Command):
             return False
         if len(args) > 1:
             return False
+        return True
 
 
 class FindBookCommand(Command):

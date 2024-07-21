@@ -1,5 +1,5 @@
-import commands as cm
-import domain_dto as d_dto
+import DDD.Domain.commands as cm
+import DDD.Domain.domain_dto as d_dto
 
 
 def ProcessRequest(request: d_dto.DomainDTORequest):
