@@ -68,7 +68,10 @@ class RemoveBookCommand(Command):  # Remove Book Command realisation
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             library_data = l_api.infrastructure_api.get_data()
-            library_data.pop(args[0])
+            try:
+                library_data.pop(args[0])
+            except KeyError:
+                raise ex.RemoveCommandException('Incorrect ID!')
             l_api.infrastructure_api.push_data(library_data)
             return d_dto.DomainDTOResponse([], True)
         else:
