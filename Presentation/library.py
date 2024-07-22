@@ -14,7 +14,8 @@ def main():
     is_to_continue = True
     while is_to_continue:
         try:
-            response = im.premap_user_input(get_input())
+            im.premap_user_input(get_input())
+            print('Here you go!')
         except ex.AddCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.RemoveCommandException:

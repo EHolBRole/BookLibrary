@@ -24,7 +24,7 @@ class Handler(ABC):
 class JsonHandler(Handler):
     def __init__(self):
         super().__init__(he.Handlers.JSON)
-        self.address = 'EffectiveMobile/JSON/library.json'
+        self.address = 'JSON/library.json'
 
     def get_data(self):
         with open(self.address, 'r+') as f:

@@ -4,6 +4,7 @@ import Application.application_dto as a_dto
 
 from Domain.entities import Book
 from abc import ABC, abstractmethod
+from api_library import LibraryAPI as l_api
 
 
 class Command(ABC):
@@ -45,7 +46,7 @@ class AddBookCommand(Command):
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             book = Book(args[0], args[1], args[2])
-            i_api.get_api().push_data(book)
+            l_api.infrastructure_api.push_data(book)
             return True
         else:
             raise ex.AddCommandException('Invalid input!')
@@ -66,9 +67,9 @@ class RemoveBookCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            library_data = i_api.infrastructure_api.get_data()
+            library_data = l_api.infrastructure_api.get_data()
             library_data.pop(args[0])
-            i_api.infrastructure_api.push_data(library_data)
+            l_api.infrastructure_api.push_data(library_data)
             return True
         else:
             raise ex.RemoveCommandException("Invalid input!")
@@ -95,7 +96,7 @@ class FindBookCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            library_data = i_api.infrastructure_api.get_data()
+            library_data = l_api.infrastructure_api.get_data()
             response_data = list()
             for book in library_data:
                 if library_data[book]['title'] == args[0]:
@@ -120,7 +121,7 @@ class ShowBooksCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            library_data = i_api.infrastructure_api.get_data()
+            library_data = l_api.infrastructure_api.get_data()
             response_data = list()
             for book in library_data:
                 response_data.append(library_data[book])
@@ -144,9 +145,9 @@ class ChangeBookStatusCommand(Command):
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
-            library_data = i_api.infrastructure_api.get_data()
+            library_data = l_api.infrastructure_api.get_data()
             library_data[args[0]]['status'] = args[1]
-            i_api.infrastructure_api.push_data(library_data)
+            l_api.infrastructure_api.push_data(library_data)
             return True
         else:
             raise ex.ChangeCommandException("Invalid input!")
