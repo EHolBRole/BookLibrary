@@ -22,9 +22,9 @@ class Handler(ABC):
 
 
 class JsonHandler(Handler):
-    def __init__(self):
+    def __init__(self, address):
         super().__init__(he.Handlers.JSON)
-        self.address = 'JSON/library.json'
+        self.address = address
 
     def get_data(self):
         with open(self.address, 'r+') as f:

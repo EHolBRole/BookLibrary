@@ -2,10 +2,14 @@ import unittest
 import unittest.mock
 import Application.application_dto as a_dto
 import Presentation.input_mapper as im
-import io
+import api_library as al
+import Tests.test_init as i
 
 
 class TestInputMapper(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        i.test_init()
+        super().__init__(*args, **kwargs)
 
     def test_premap_user_input(self):
         test_input1 = ['add', 'test', 'test', '2000']
