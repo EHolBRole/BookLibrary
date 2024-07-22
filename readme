@@ -1,0 +1,15 @@
+This is a simple Console Application for managing books library. You can use it to add, remove, find and change statuses of books. Books data is stored with JSON format.
+
+How to use it: 
+
+To launch the app simple launch 'launch_app.py' file. 
+
+Available commands:
+
+add {name} {author} {year} - Command to add book to library. Arguments of name, author and year are necessary.
+rm {id} - Command to remove book from library. Argument of book id is necessary.
+ls - Command to print all books in the library. No available arguments for the moment.
+find {name/author/year} - Command to find and print books with specific author, name or year. 
+schange {id} {'given'/'stocked'} - Command to change book status. Arguments of book id and status are necessary.
+
+Note: There are no support of WhiteSpaces in the current version of the programm. Use '_' instead. 
