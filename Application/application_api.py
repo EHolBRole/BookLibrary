@@ -14,4 +14,5 @@ def PreProcessRequest(request: ap.ApplicationDTORequest):
             return d_api.ProcessRequest(d_request)
     if not is_executed:
         raise ex.IncorrectCommandException("Invalid command!")
-    pass
+
+    return False

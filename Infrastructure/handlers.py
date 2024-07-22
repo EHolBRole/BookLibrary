@@ -1,10 +1,14 @@
 import json
 import Domain.entities as e
+import Infrastructure.handler_enum as he
 
 from abc import ABC, abstractmethod
 
 
 class Handler(ABC):
+    def __init__(self, h_type):
+        self.h_type = h_type
+        pass
 
     @abstractmethod
     def push_data(self, data):
@@ -18,9 +22,9 @@ class Handler(ABC):
 
 
 class JsonHandler(Handler):
-    def __init__(self, address):
-        self.address = address
-        pass
+    def __init__(self):
+        super().__init__(he.Handlers.JSON)
+        self.address = 'EffectiveMobile/JSON/library.json'
 
     def get_data(self):
         with open(self.address, 'r+') as f:

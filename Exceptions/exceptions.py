@@ -28,3 +28,6 @@ class ExitCommandException(Exception):
 
 class FinishInterpretationException(Exception):
     pass
+
+class HandlerException(Exception):
+    pass

@@ -1,8 +1,8 @@
 import json
 
 import Exceptions.exceptions as ex
-import input_mapper as im
-import response_handler as rh
+import Presentation.input_mapper as im
+import Presentation.response_handler as rh
 
 
 def get_input():
@@ -15,8 +15,6 @@ def main():
     while is_to_continue:
         try:
             response = im.premap_user_input(get_input())
-            if type(response) is not bool:
-                rh.process_response(response)
         except ex.AddCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.RemoveCommandException:
@@ -38,4 +36,4 @@ def main():
             is_to_continue = False
 
 
-main()
+# main()

@@ -45,7 +45,7 @@ class AddBookCommand(Command):
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             book = Book(args[0], args[1], args[2])
-            i_api.infrastructure_api.push_data(book)
+            i_api.get_api().push_data(book)
             return True
         else:
             raise ex.AddCommandException('Invalid input!')

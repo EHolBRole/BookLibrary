@@ -1,4 +1,5 @@
 import Infrastructure.handlers as h
+import Exceptions.exceptions as e
 
 
 class InfrastructureAPI:
@@ -14,4 +15,14 @@ class InfrastructureAPI:
     pass
 
 
-infrastructure_api = InfrastructureAPI(h.JsonHandler('../../JSON/library.json'))
+def get_api(handler_type):  # NOTE: Think about Abstract Fabric pattern
+    handlers = {h.JsonHandler()}
+
+    for handler in handlers:
+        if handler_type == handler.h_type:
+            return InfrastructureAPI(handler)
+    else:
+        raise e.HandlerException('Invalid handler type.')
+    pass
+
+
