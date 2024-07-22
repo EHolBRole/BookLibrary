@@ -1,5 +1,6 @@
 import Infrastructure.handlers as h
 import Exceptions.exceptions as e
+import pathlib as p
 
 """
 This is module for communication to Infrastructure from other layers
@@ -20,7 +21,7 @@ class InfrastructureAPI:
 
 
 def get_api(handler_type):  # NOTE: Think about Abstract Fabric pattern
-    handlers = {h.JsonHandler('JSON/library.json')}
+    handlers = {h.JsonHandler(p.Path('JSON/library.json'))}
 
     for handler in handlers:
         if handler_type == handler.h_type:

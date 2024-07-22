@@ -17,7 +17,7 @@ class Test6DomainAPI(unittest.TestCase):
         test_input2 = []
         test_input3 = ['1']
 
-        expected_response2 = d_dto.DomainDTOResponse([{"title": "test", "author": "test", "year": "2000", "status": "stocked"}], True)
+        expected_response2 = d_dto.DomainDTOResponse([{"title": "test", "author": "test", "year": "2000", "status": "stocked", "id": 1}], True)
 
         request1 = d_dto.DomainDTORequest(test_command1, test_input1)
         request2 = d_dto.DomainDTORequest(test_command2, test_input2)

@@ -17,7 +17,7 @@ class TestApplicationAPI(unittest.TestCase):
         test_input2 = ['ls']
         test_input3 = ['rm', '1']
 
-        expected_response2 = a_dto.ApplicationDTOResponse([{'author': 'test', 'status': 'stocked', 'title': 'test', 'year': '2000'}])
+        expected_response2 = a_dto.ApplicationDTOResponse([{'author': 'test', 'status': 'stocked', 'title': 'test', 'year': '2000', 'id': 1}])
 
         request1 = a_dto.ApplicationDTORequest(test_input1)
         request2 = a_dto.ApplicationDTORequest(test_input2)
