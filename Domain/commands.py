@@ -1,3 +1,5 @@
+import unittest
+
 import Exceptions.exceptions as ex
 import Infrastructure.infrastructure_api as i_api
 import Domain.domain_dto as d_dto
@@ -110,6 +112,8 @@ class FindBookCommand(Command):
 
 class ShowBooksCommand(Command):
     def is_user_input_valid(self, args: list[str]):
+        if len(args) > 0:
+            return False
         return True
 
     def __init__(self):
