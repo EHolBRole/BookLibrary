@@ -1,6 +1,6 @@
 import Exceptions.exceptions as ex
 import Infrastructure.infrastructure_api as i_api
-import Application.application_dto as a_dto
+import Domain.domain_dto as d_dto
 
 from Domain.entities import Book
 from abc import ABC, abstractmethod
@@ -23,6 +23,9 @@ class Command(ABC):
 
 
 class ExitAppCommand(Command):
+    def __init__(self):
+        super().__init__('exit')
+
     def is_user_input_valid(self, args: list[str]):
         if len(args) != 0:
             return False
@@ -34,20 +37,16 @@ class ExitAppCommand(Command):
         else:
             raise ex.ExitCommandException('Invalid input!')
 
-    def __init__(self):
-        super().__init__('exit')
-
 
 class AddBookCommand(Command):
     def __init__(self):
         super().__init__('add')
-        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             book = Book(args[0], args[1], args[2])
             l_api.infrastructure_api.push_data(book)
-            return True
+            return d_dto.DomainDTOResponse([], True)
         else:
             raise ex.AddCommandException('Invalid input!')
         pass
@@ -63,14 +62,13 @@ class RemoveBookCommand(Command):
 
     def __init__(self):
         super().__init__('rm')
-        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             library_data = l_api.infrastructure_api.get_data()
             library_data.pop(args[0])
             l_api.infrastructure_api.push_data(library_data)
-            return True
+            return d_dto.DomainDTOResponse([], True)
         else:
             raise ex.RemoveCommandException("Invalid input!")
         pass
@@ -92,7 +90,6 @@ class FindBookCommand(Command):
 
     def __init__(self):
         super().__init__('find')
-        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -105,7 +102,7 @@ class FindBookCommand(Command):
                     response_data.append(library_data[book])
                 elif library_data[book]['year'] == args[0]:
                     response_data.append(library_data[book])
-            return a_dto.ApplicationDTOResponse(response_data)
+            return d_dto.DomainDTOResponse(response_data, True)
         else:
             raise ex.FindCommandException("Invalid input!")
         pass
@@ -117,7 +114,6 @@ class ShowBooksCommand(Command):
 
     def __init__(self):
         super().__init__('ls')
-        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
@@ -125,7 +121,7 @@ class ShowBooksCommand(Command):
             response_data = list()
             for book in library_data:
                 response_data.append(library_data[book])
-            return a_dto.ApplicationDTOResponse(response_data)
+            return d_dto.DomainDTOResponse(response_data, True)
         else:
             raise ex.ShowCommandException("Invalid input!")
         pass
@@ -141,14 +137,13 @@ class ChangeBookStatusCommand(Command):
 
     def __init__(self):
         super().__init__('schange')
-        self.lib_address = None
 
     def execute(self, args: list[str]):
         if self.is_user_input_valid(args):
             library_data = l_api.infrastructure_api.get_data()
             library_data[args[0]]['status'] = args[1]
             l_api.infrastructure_api.push_data(library_data)
-            return True
+            return d_dto.DomainDTOResponse([], True)
         else:
             raise ex.ChangeCommandException("Invalid input!")
         pass

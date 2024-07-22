@@ -6,5 +6,14 @@ class DomainDTORequest:
         self.command = command
         self.args = args
         pass
+
     pass
 
+
+class DomainDTOResponse:
+    def __init__(self, response_data: list, status: bool):
+        self.response_data = response_data
+        self.status = status
+        pass
+
+    pass
