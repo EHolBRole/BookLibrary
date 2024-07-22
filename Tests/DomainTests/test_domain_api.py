@@ -2,34 +2,34 @@ import unittest
 import unittest.mock
 import Domain.domain_dto as d_dto
 import Domain.domain_api as d_api
+import Domain.commands as c
 import api_library as al
 import Tests.test_init as i
 
 
-class TestInputMapper(unittest.TestCase):
-
-    def __init__(self, *args, **kwargs):
+class Test6DomainAPI(unittest.TestCase):
+    def test_process_request(self):
         i.test_init()
-        super().__init__(*args, **kwargs)
+        test_command1 = c.AddBookCommand()
+        test_command2 = c.ShowBooksCommand()
+        test_command3 = c.RemoveBookCommand()
+        test_input1 = ['test', 'test', '2000']
+        test_input2 = []
+        test_input3 = ['1']
 
-    def test_premap_user_input(self):
-        test_input1 = ['add', 'test', 'test', '2000']
-        test_input2 = ['ls']
-        test_input3 = ['rm', '1']
+        expected_response2 = d_dto.DomainDTOResponse([{"title": "test", "author": "test", "year": "2000", "status": "stocked"}], True)
 
-        expected_response2 = d_dto.DomainDTORequest([{'author': 'test', 'status': 'stocked', 'title': 'test', 'year': '2000'}])
-
-        request1 = d_dto.DomainDTORequest(test_input1)
-        request2 = d_dto.DomainDTORequest(test_input2)
-        request3 = d_dto.DomainDTORequest(test_input3)
+        request1 = d_dto.DomainDTORequest(test_command1, test_input1)
+        request2 = d_dto.DomainDTORequest(test_command2, test_input2)
+        request3 = d_dto.DomainDTORequest(test_command3, test_input3)
 
         response1 = d_api.ProcessRequest(request1)
         response2 = d_api.ProcessRequest(request2)
         response3 = d_api.ProcessRequest(request3)
 
-        self.assertEqual(response1, True)
-        self.assertEqual(response2.response_data, expected_response2.args)
-        self.assertEqual(response3, True)
+        self.assertEqual(response1.status, True)
+        self.assertEqual(response2.response_data, expected_response2.response_data)
+        self.assertEqual(response3.status, True)
         pass
 
     pass

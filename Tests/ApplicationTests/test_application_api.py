@@ -6,13 +6,13 @@ import api_library as al
 import Tests.test_init as i
 
 
-class TestInputMapper(unittest.TestCase):
+class TestApplicationAPI(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         i.test_init()
         super().__init__(*args, **kwargs)
 
-    def test_premap_user_input(self):
+    def test_pre_process_request(self):
         test_input1 = ['add', 'test', 'test', '2000']
         test_input2 = ['ls']
         test_input3 = ['rm', '1']
@@ -27,9 +27,9 @@ class TestInputMapper(unittest.TestCase):
         response2 = a_api.PreProcessRequest(request2)
         response3 = a_api.PreProcessRequest(request3)
 
-        self.assertEqual(response1, True)
+        self.assertEqual(response1.response_data, [])
         self.assertEqual(response2.response_data, expected_response2.response_data)
-        self.assertEqual(response3, True)
+        self.assertEqual(response3.response_data, [])
         pass
 
     pass
