@@ -40,6 +40,7 @@ class JsonHandler(Handler):
                         nk = 1 + int(list(library_data)[-1])
                     else:
                         nk = 1 + 0
+                    data.id = nk
                     library_data[nk] = data.__dict__
                     with open(self.address, 'w') as fi:
                         json.dump(library_data, fi)

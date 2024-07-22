@@ -4,4 +4,5 @@ class Book:
         self.author = author
         self.year = year
         self.status = "stocked"
+        self.id = None
 
