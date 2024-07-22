@@ -16,7 +16,7 @@ class InfrastructureAPI:
 
 
 def get_api(handler_type):  # NOTE: Think about Abstract Fabric pattern
-    handlers = {h.JsonHandler()}
+    handlers = {h.JsonHandler('JSON/library.json')}
 
     for handler in handlers:
         if handler_type == handler.h_type:
