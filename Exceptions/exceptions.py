@@ -1,34 +1,34 @@
-class AddCommandException(Exception):
+class AddCommandException(Exception):  # Exception for Add command
     pass
 
 
-class RemoveCommandException(Exception):
+class RemoveCommandException(Exception):  # Exception for Remove command
     pass
 
 
-class FindCommandException(Exception):
+class FindCommandException(Exception):  # Exception for Find command
     pass
 
 
-class ShowCommandException(Exception):
+class ShowCommandException(Exception):  # Exception for Show command
     pass
 
 
-class ChangeCommandException(Exception):
+class ChangeStatusCommandException(Exception):  # Exception for Change Status command
     pass
 
 
-class IncorrectCommandException(Exception):
+class IncorrectCommandException(Exception):  # Exception for incorrect command validation
     pass
 
 
-class ExitCommandException(Exception):
+class ExitCommandException(Exception):   # Exception for Exit command
     pass
 
 
-class FinishInterpretationException(Exception):
+class FinishInterpretationException(Exception):  # Exception to quit the App
     pass
 
 
-class HandlerException(Exception):
+class HandlerException(Exception):  # Exception for Handlers from Infrastructure layer
     pass

@@ -1,6 +1,10 @@
 import Infrastructure.handlers as h
 import Exceptions.exceptions as e
 
+"""
+This is module for communication to Infrastructure from other layers
+"""
+
 
 class InfrastructureAPI:
     def __init__(self, handler: h.Handler):

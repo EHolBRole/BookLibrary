@@ -5,7 +5,7 @@ import Infrastructure.handler_enum as he
 from abc import ABC, abstractmethod
 
 
-class Handler(ABC):
+class Handler(ABC):  # Abstract class for all Handlers, that control Data.
     def __init__(self, h_type):
         self.h_type = h_type
         pass
@@ -21,7 +21,7 @@ class Handler(ABC):
     pass
 
 
-class JsonHandler(Handler):
+class JsonHandler(Handler):  # Realisation of JSON data format usage
     def __init__(self, address):
         super().__init__(he.Handlers.JSON)
         self.address = address

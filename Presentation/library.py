@@ -4,13 +4,17 @@ import Exceptions.exceptions as ex
 import Presentation.input_mapper as im
 import Presentation.response_handler as rh
 
+"""
+This module is realisation for all the application
+"""
 
-def get_input():
+
+def get_input():  # Easy parser of user input
     user_input = input().split()
     return user_input
 
 
-def main():
+def main():  # Main function
     is_to_continue = True
     while is_to_continue:
         try:
@@ -22,7 +26,7 @@ def main():
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.FindCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
-        except ex.ChangeCommandException:
+        except ex.ChangeStatusCommandException:
             print('Sorry, you\'ve entered wrong arguments!')
         except ex.ShowCommandException:
             print('Sorry, you\'ve entered wrong arguments!')

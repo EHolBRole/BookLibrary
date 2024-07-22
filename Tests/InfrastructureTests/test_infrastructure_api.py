@@ -26,7 +26,7 @@ class TestInfrastructureAPI(unittest.TestCase):
         i.test_init()
         expected_result = {}
 
-        result = al.LibraryAPI.infrastructure_api.get_data()
+        result = al.LibraryRepository.infrastructure_api.get_data()
 
         self.assertEqual(expected_result, result)
         pass
@@ -35,9 +35,9 @@ class TestInfrastructureAPI(unittest.TestCase):
         i.test_init()
         expected_result = {}
 
-        al.LibraryAPI.infrastructure_api.push_data({})
+        al.LibraryRepository.infrastructure_api.push_data({})
 
-        result = al.LibraryAPI.infrastructure_api.get_data()
+        result = al.LibraryRepository.infrastructure_api.get_data()
 
         self.assertEqual(expected_result, result)
         pass

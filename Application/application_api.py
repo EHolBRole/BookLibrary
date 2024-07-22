@@ -3,8 +3,12 @@ import Domain.domain_dto as d_dto
 import Domain.domain_api as d_api
 import Exceptions.exceptions as ex
 
+"""
+This module is for API to interact with Application Layer from other layers
+"""
 
-def PreProcessRequest(request: a_dto.ApplicationDTORequest):
+
+def PreProcessRequest(request: a_dto.ApplicationDTORequest):  # Converts request to Application to request to Domain
     is_executed = False
     for c in d_api.available_commands:
         if request.request_data[0] == c.name:

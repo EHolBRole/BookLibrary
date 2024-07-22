@@ -6,10 +6,10 @@ import Domain.domain_dto as d_dto
 
 from Domain.entities import Book
 from abc import ABC, abstractmethod
-from api_library import LibraryAPI as l_api
+from api_library import LibraryRepository as l_api
 
 
-class Command(ABC):
+class Command(ABC):  # Pattern Command used. This is abstract class for all commands.
     def __init__(self, name):
         self.name = name
 
@@ -24,7 +24,7 @@ class Command(ABC):
     pass
 
 
-class ExitAppCommand(Command):
+class ExitAppCommand(Command):  # Exit App Command realisation
     def __init__(self):
         super().__init__('exit')
 
@@ -40,7 +40,7 @@ class ExitAppCommand(Command):
             raise ex.ExitCommandException('Invalid input!')
 
 
-class AddBookCommand(Command):
+class AddBookCommand(Command):  # Add Book Command realisation
     def __init__(self):
         super().__init__('add')
 
@@ -60,7 +60,7 @@ class AddBookCommand(Command):
     pass
 
 
-class RemoveBookCommand(Command):
+class RemoveBookCommand(Command):  # Remove Book Command realisation
 
     def __init__(self):
         super().__init__('rm')
@@ -83,7 +83,7 @@ class RemoveBookCommand(Command):
         return True
 
 
-class FindBookCommand(Command):
+class FindBookCommand(Command):  # Find Book Command realisation
     def is_user_input_valid(self, args: list[str]):
         if len(args) != 1:
             return False
@@ -110,7 +110,7 @@ class FindBookCommand(Command):
         pass
 
 
-class ShowBooksCommand(Command):
+class ShowBooksCommand(Command):  # Show Book Command realisation
     def is_user_input_valid(self, args: list[str]):
         if len(args) > 0:
             return False
@@ -131,7 +131,7 @@ class ShowBooksCommand(Command):
         pass
 
 
-class ChangeBookStatusCommand(Command):
+class ChangeBookStatusCommand(Command):  # Change Book Status Command realisation
     def is_user_input_valid(self, args: list[str]):
         if len(args) != 2:
             return False
@@ -149,5 +149,5 @@ class ChangeBookStatusCommand(Command):
             l_api.infrastructure_api.push_data(library_data)
             return d_dto.DomainDTOResponse([], True)
         else:
-            raise ex.ChangeCommandException("Invalid input!")
+            raise ex.ChangeStatusCommandException("Invalid input!")
         pass
