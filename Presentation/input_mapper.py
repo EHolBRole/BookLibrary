@@ -9,7 +9,7 @@ def premap_user_input(u_input: list[str]):  # Maps user input to Application req
         raise ex.IncorrectCommandException("Invalid input")
 
     request = a_dto.ApplicationDTORequest(u_input)
-    response = a.PreProcessRequest(request)
+    response = a.pre_process_request(request)
 
     if type(response) is not bool:
         rh.process_response(response)

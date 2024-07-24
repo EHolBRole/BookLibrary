@@ -23,9 +23,9 @@ class TestApplicationAPI(unittest.TestCase):
         request2 = a_dto.ApplicationDTORequest(test_input2)
         request3 = a_dto.ApplicationDTORequest(test_input3)
 
-        response1 = a_api.PreProcessRequest(request1)
-        response2 = a_api.PreProcessRequest(request2)
-        response3 = a_api.PreProcessRequest(request3)
+        response1 = a_api.pre_process_request(request1)
+        response2 = a_api.pre_process_request(request2)
+        response3 = a_api.pre_process_request(request3)
 
         self.assertEqual(response1.response_data, [])
         self.assertEqual(response2.response_data, expected_response2.response_data)

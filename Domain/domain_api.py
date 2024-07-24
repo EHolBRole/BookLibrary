@@ -6,7 +6,7 @@ This module is for communication to Domain from other layers
 """
 
 
-def ProcessRequest(request: d_dto.DomainDTORequest):  # Processes request to Domain.
+def process_request(request: d_dto.DomainDTORequest):  # Processes request to Domain.
     return request.command.execute(request.args)
     pass
 

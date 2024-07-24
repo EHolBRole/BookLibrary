@@ -23,9 +23,9 @@ class Test6DomainAPI(unittest.TestCase):
         request2 = d_dto.DomainDTORequest(test_command2, test_input2)
         request3 = d_dto.DomainDTORequest(test_command3, test_input3)
 
-        response1 = d_api.ProcessRequest(request1)
-        response2 = d_api.ProcessRequest(request2)
-        response3 = d_api.ProcessRequest(request3)
+        response1 = d_api.process_request(request1)
+        response2 = d_api.process_request(request2)
+        response3 = d_api.process_request(request3)
 
         self.assertEqual(response1.status, True)
         self.assertEqual(response2.response_data, expected_response2.response_data)
